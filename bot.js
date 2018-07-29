@@ -1,4 +1,17 @@
- client.on("message", async message => {
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('message', msg => {
+  if (msg.content === '!invites') {
+    msg.reply('please type =invites to see your invites');
+  }
+});
+
+client.on("message", async message => {
             if(!message.channel.guild) return;
             var prefix = "=";
         if(message.content.startsWith(prefix + 'invites')) {
@@ -16,13 +29,13 @@
               console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
               var embed = new Discord.RichEmbed()
                   .setColor("#000000")
-                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
+                    .addField(`${message.author.username}`, `you are add**${nul}** human`)
                           message.channel.send({ embed: embed });
                       return;
                     } else {
                        var embed = new Discord.RichEmbed()
                         .setColor("#000000")
-                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
+                        .addField(`${message.author.username}`, `you can't not invite a one in this server`)
 
                        message.channel.send({ embed: embed });
                         return;
@@ -31,7 +44,7 @@
         if(message.content.startsWith(prefix + 'invite-codes')) {
 let guild = message.guild
 var codes = [""]
-message.channel.send(":postbox: **لقد قمت بأرسال جميع روابط الدعوات التي قمت بأنشائها في الخاص**")
+message.channel.send(":postbox: **Invites-Codes in DM**")
 guild.fetchInvites()
 .then(invites => {
 invites.forEach(invite => {
@@ -57,3 +70,6 @@ return;
 }
 
 });
+
+
+client.logun(process.env.BOT_TOKEN)
